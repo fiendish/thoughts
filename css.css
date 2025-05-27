@@ -1,0 +1,22 @@
+body {
+    margin: auto;
+    padding: 0 40px;
+    font-size: 20px;
+    max-width: 900px;
+    color:#111;
+    background-color: #F8F8FF;
+    font-family: "Comic Sans MS", "Comic Sans";
+}
+li { padding: 5px; }
+pre,code {
+   background-color: #FFF8DC;
+   color: #EE0000
+}
+.notebox {
+   border: 1px solid;
+   border-radius: 5px;
+   padding: 10px;
+   margin: 10px 0;
+   border-color: #0096C7;
+   background-color: rgba(0, 150, 199, 0.1);
+}

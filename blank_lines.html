@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avi's thoughts on signaling intent</title>
+<link rel="stylesheet" href="css.css">
+</head>
+<body>
+<a href="index.html">⬅ back to the index</a><br>
+(These opinions are my own and not those of my employer.)
+<br><br>
+<hr>
+<h1>Signaling Intent By Adding Blank Lines Between Blocks With Ambiguous Relationships</h1>
+The best code isn't just easy to read. It also helps you catch mistakes.
+<br>
+This is not a perfect process. Do your best.
+
+In Python you don't get the benefit of curly braces to indicate the boundaries of a block, so you have to rely on indentation to indicate the effects of a condition. Some people think this is a good thing, but it means that you can accidentally change the meaning of the code by changing the indentation, and it means that a person cannot look at code and know without any doubt what the code is supposed to be doing, and that's definitely bad, so we need to put additional care into formatting our code to alleviate this.
+<h2>Good blank lines</h2>
+<h3>Consider the following blocks of code:</h3>
+Original
+<pre>
+if a:
+    b
+else:
+    c
+if d:
+    e
+if f:
+    g
+</pre>
+Altered
+<pre>
+if a:
+    b
+else:
+    c
+    if d:
+        e
+        if f:
+            g
+</pre>
+They're identical except someone accidentally hit tab while some lines were selected.<br>
+The behaviors are obviously different, but which behavior is correct? <strong>You have no way of knowing.</strong>
+You don't know this code. You don't know the history of why this code was written in the first place. You don't know the decisions that went into making this code the way it is. You don't know which of the code is intentional and which of the code is just a simple mistake.
+<h3>But what if the original code had signaled intent?</h3>
+<pre>
+if a:
+    b
+else:
+    c
+
+if d:
+    e
+
+if f:
+    g
+</pre>
+It's a small difference, but now you don't have to guess which lines are supposed to be part of which scope. You can see that the three <code>if</code>s are meant to be at the same scope with each other. The distance between correct behavior and undetectably incorrect behavior has increased from one accidental edit to more than one.
+<br><br>
+It's not a perfect signal, of course, because nothing stops people from putting blank lines where they aren't needed, but at least if the indentation changes accidentally like
+<pre>
+if a:
+    b
+else:
+    c
+
+    if d:
+        e
+</pre>
+You can then say "Wait! The blank line there means I need to look more closely at what this is doing. There <em>might</em> be a mistake here." And that's a very useful signal.
+<h2>Bad blank lines</h2>
+Don't do this:
+<pre>
+if a:
+    b
+
+else:
+    c
+</pre>
+There's no logical separation between the <code>if</code> and the <code>else</code> in a condition, they're necessarily connected to each other, so splitting them apart increases confusion instead of reducing it.
+<br><br>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avi's thoughts on good code</title>
+<link rel="stylesheet" href="css.css">
+</head>
+<body>
+<a href="index.html">⬅ back to the index</a><br>
+(These opinions are my own and not those of my employer.)
+<br><br>
+<hr>
+<h1>Good Code</h1>
+
+<h3>There are two rules for good code:</h3>
+<ol>
+    <li>Minimize the cognitive burden of running the code in one's head from start to finish, exactly, correctly, and without guessing.</li>
+    <li>Your intent should be perfectly unambiguous.</li>
+</ol>
+
+You may expand this to...
+
+<h3>There are four rules for good code:</h3>
+<ol>
+    <li>Less code takes less energy to read and understand as long as it's not overtly confusing.</li>
+    <li>Don't make people look somewhere else to understand what something means or will do, within the limits of rule 1, because every value you need to remember and every visual jump increases the cost to maintain mental execution state.</li>
+    <li>Avoid code that will happily do something unexpected if someone accidentally hits a key without realizing it.</li>
+    <li>Use structural elements to clarify what the code is supposed to be doing so that it's easier to detect when it's accidentally not doing that.</li>
+</ol>
+<hr>
+<h1>Extended Edition</h1>
+
+<h3>Draining code:</h3>
+Debugging code requires running it in your head. Running code in your head costs mental energy.
+<br>Needing to remember and keep track of things increases the mental burden.
+<br>This is exponentially worse for everyone who isn't the author.
+<br>So make the read as linear and compact as possible to reduce the burden you place on others. <sup>[1]</sup>
+<br><sub>[1] - within the limits imposed by interface enforcement mechanisms available in the language</sub>
+
+<ul>
+<li>Less code is better code. (But it's ok to write more if writing less requires doing something confusing.)</li>
+<li>Define and describe variables, constants, and functions as close as possible to where they're used.</li>
+<li>Name and call functions in ways that make what will happen to the inputs obvious.</li>
+<li>Temporary variables and small functions that are only used once increase the distance, so they often hurt more than they help.</li>
+<li>Bugs get investigated based on a failing process, so organize code based on what process path it supports rather than what kind of code it is.</li>
+<ul>
+    <li>DON'T put variables together just because they're variables.</li>
+    <li>DO put things for supporting a particular user request together so anyone without prior knowledge can immediately find the stuff needed for that user request.</li>
+</ul>
+<li>Don't be afraid to add new files for components that are shared between different parts of your code. Just think about what you're doing and name them well.</li>
+<li>Returning early from a function is almost always a good thing, because you get to stop reading the function sooner.</li>
+</ul>
+
+<h3>Dangerous code:</h3>
+Code that just keeps running but does the wrong thing if someone accidentally deletes a character or presses tab will start silently doing the wrong thing because someone will accidentally delete a character or press tab, and you won't know until it's too late.
+
+<ul>
+    <li>Don't compare literal values. Put all constants into shared variables.</li>
+    <li>Don't use commas to create single item tuples in Python, because removing the trailing comma completely alters the meaning and it's not going to be obvious which intent is correct just by looking at the code. Use the more verbose <code>tuple([thing])</code> instead.</li>
+    <li>Don't give two things similar names. (Never do <code>for name_of_thing in name_of_things:</code>).</li>
+    <li><a href="blank_lines.html">In languages without conditional boundary braces, like Python, add a blank line after conditional blocks to signal that the next code <em>is not supposed to be</em> part of the block.</a> In languages with them, always use them no matter what, even if the language treates them as optional sometimes.</li>
+    <li>If you can indicate your types, INDICATE YOUR TYPES! This means both inputs and outputs. And be detailed about it; if your function takes another function as input, you better tell me what that other function is supposed to take as input and return as output, not just that it's a function that takes "something" and returns "something".
+</ul>
+<br>
+</body>
+</html>
